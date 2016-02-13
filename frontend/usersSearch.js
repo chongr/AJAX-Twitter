@@ -28,13 +28,23 @@ UsersSearch.prototype.renderResults = function (data) {
   var innerThat = this;
   innerThat.$ul.empty();
   data.forEach (function(obj) {
+
+    function options (userInfo) {
+      this.userId = userInfo.id;
+      if (userInfo.followed) {
+        this.followState = "followed";
+      } else if (!userInfo.followed) {
+        this.followState = "unfollowed";
+      }
+    }
+
     var $obj = $('<li>');
     $obj.text(obj['username']);
 
-    // var $toggle = $('<input>');
-    // $toggle.attr("type","button");
-    // var toggle = new FollowToggle($toggle);
-    // $obj.append($toggle);
+    var $toggle = $('<input>');
+    $toggle.attr("type","button");
+    var toggle = new FollowToggle($toggle, new options (obj));
+    $obj.append($toggle);
 
     innerThat.$ul.append($obj);
   });

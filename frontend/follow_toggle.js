@@ -33,7 +33,7 @@ FollowToggle.prototype.handleClick = function(e) {
     });
   } else {
     $.ajax({
-      url: window.location.href + "follow",
+      url: "/users/" + that.userId + "/follow",
       method: "DELETE",
       dataType: "JSON",
       success: function (data) {
